@@ -1,5 +1,5 @@
 NAME := sqls
-VERSION := $(shell git describe --tags `git rev-list --tags --max-count=1`)
+VERSION := $(shell git describe --tags --always `git rev-list --tags --max-count=1`)
 REVISION := $(shell git rev-parse --short HEAD)
 GOVERSION := $(go version)
 GITHUB_TOKEN := $(GITHUB_TOKEN)
@@ -14,11 +14,11 @@ test:
 
 .PHONY: build
 build: $(SRCS)
-	go build $(LDFLAGS) ./...
+	go build $(LDFLAGS) .
 
 .PHONY: install
 install: $(SRCS)
-	go install $(LDFLAGS) ./...
+	go install $(LDFLAGS) .
 
 .PHONY: lint
 lint: $(SRCS)

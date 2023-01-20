@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/k0kubun/pp"
+	"github.com/k0kubun/pp/v3"
 
 	"github.com/lighttiger2505/sqls/dialect"
 )
@@ -75,7 +75,7 @@ func TestTokenizer_Tokenize(t *testing.T) {
 		},
 		{
 			name: "whitespace and tab",
-			in: "\r\n	",
+			in:   "\r\n	",
 			out: []*Token{
 				{
 					Kind:  Whitespace,
@@ -809,7 +809,7 @@ asdf`,
 			{
 				name: "multiline statements",
 				src: `select count(id)
-from account 
+from account
 where name like '%test%'`,
 				expect: Pos{Line: 2, Col: 24},
 			},

@@ -12,8 +12,8 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/jackc/pgx/v4"
-	"github.com/jackc/pgx/v4/stdlib"
+	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/stdlib"
 	"github.com/lighttiger2505/sqls/dialect"
 	"golang.org/x/crypto/ssh"
 )
@@ -196,12 +196,12 @@ func (db *PostgreSQLDBRepository) Tables(ctx context.Context) ([]string, error) 
 		ctx,
 		`
 	SELECT
-	  table_name 
+	  table_name
 	FROM
-	  information_schema.tables 
+	  information_schema.tables
 	WHERE
-	  table_type = 'BASE TABLE' 
-	  AND table_schema NOT IN ('pg_catalog', 'information_schema') 
+	  table_type = 'BASE TABLE'
+	  AND table_schema NOT IN ('pg_catalog', 'information_schema')
 	ORDER BY
 	  table_name
 	`)
@@ -430,7 +430,8 @@ func genPostgresConfig(connCfg *DBConfig) (string, error) {
 // ignoring any values with keys in ignore.
 //
 // For example, to build a "ODBC" style connection string, use like the following:
-//     genOptions(u.Query(), "", "=", ";", ",")
+//
+//	genOptions(u.Query(), "", "=", ";", ",")
 func genOptions(q url.Values, joiner, assign, sep, valSep string, skipWhenEmpty bool, ignore ...string) string {
 	qlen := len(q)
 	if qlen == 0 {
